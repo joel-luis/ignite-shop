@@ -1,12 +1,11 @@
 import logoImg from 'assets/logo.svg'
+import Image from 'next/image'
 import * as S from './styles'
 
 export function Header() {
   return (
-    <S.Container>
-      <S.Header>
-        <img src={logoImg.src} alt="" />
-      </S.Header>
-    </S.Container>
+    <S.Header>
+      <Image src={logoImg} alt="" />
+    </S.Header>
   )
 }
