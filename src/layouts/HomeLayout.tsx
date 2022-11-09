@@ -1,14 +1,12 @@
 import Image from 'next/image'
-import * as S from './styles'
+
 import { useKeenSlider } from 'keen-slider/react'
+import { HomeProps, ProductsProps } from 'pages'
 
-import camiseta1 from 'assets/camisetas/1.png'
-import camiseta2 from 'assets/camisetas/2.png'
-import camiseta3 from 'assets/camisetas/3.png'
-
+import * as S from './styles'
 import 'keen-slider/keen-slider.min.css'
 
-export function HomeLayout() {
+export function HomeLayout({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -17,34 +15,15 @@ export function HomeLayout() {
   })
   return (
     <S.HomeContainer ref={sliderRef} className="keen-slider">
-      <S.Product className="keen-slider__slide">
-        <Image src={camiseta1} width={520} height={480} alt="" />
-        <footer>
-          <strong>Camiseta X</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </S.Product>
-      <S.Product className="keen-slider__slide">
-        <Image src={camiseta2} width={520} height={480} alt="" />
-        <footer>
-          <strong>Camiseta X</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </S.Product>
-      <S.Product className="keen-slider__slide">
-        <Image src={camiseta3} width={520} height={480} alt="" />
-        <footer>
-          <strong>Camiseta X</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </S.Product>
-      <S.Product className="keen-slider__slide">
-        <Image src={camiseta3} width={520} height={480} alt="" />
-        <footer>
-          <strong>Camiseta X</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </S.Product>
+      {products.map(({ id, name, imageUrl, price }: ProductsProps) => (
+        <S.Product key={id} className="keen-slider__slide">
+          <Image src={imageUrl} width={520} height={480} alt="" />
+          <footer>
+            <strong>{name}</strong>
+            <span>{price}</span>
+          </footer>
+        </S.Product>
+      ))}
     </S.HomeContainer>
   )
 }

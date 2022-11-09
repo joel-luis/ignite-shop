@@ -42,11 +42,11 @@ export const Product = styled('a', {
     transition: 'all 0.3s ease-in-out',
 
     strong: {
-      fontSize: '$lg',
+      fontSize: '$md',
     },
 
     span: {
-      fontSize: '$xl',
+      fontSize: '$md',
       fontWeight: 'bold',
       color: '$green300',
     },
