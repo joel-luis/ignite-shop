@@ -1,8 +1,28 @@
+import { useState } from 'react'
+import axios from 'axios'
 import Image from 'next/image'
 import { ProductProps } from 'pages/product/[id]'
 import * as S from './styles'
 
 export default function ProductLayout({ product }: ProductProps) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false)
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true)
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      })
+
+      const { checkoutUrl } = response.data
+      window.location.href = checkoutUrl
+    } catch (err) {
+      alert('Falha ao redirecionar ao checkout!')
+      setIsCreatingCheckoutSession(false)
+      console.log(err)
+    }
+  }
+
   return (
     <S.ProductContainer>
       <S.ImageContainer>
@@ -12,7 +32,9 @@ export default function ProductLayout({ product }: ProductProps) {
         <h1>{product.name}</h1>
         <span>{product.price}</span>
         <p>{product.description}</p>
-        <button>Comprar agora</button>
+        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
+          Comprar agora
+        </button>
       </S.IProductDetails>
     </S.ProductContainer>
   )
