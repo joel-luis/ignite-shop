@@ -8,7 +8,7 @@ export interface ProductsProps {
   id: string
   name: string
   imageUrl: string
-  price: number
+  price: string
 }
 
 export interface HomeProps {

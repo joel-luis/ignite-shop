@@ -1,18 +1,17 @@
+import Image from 'next/image'
+import { ProductProps } from 'pages/product/[id]'
 import * as S from './styles'
 
-export default function ProductLayout() {
+export default function ProductLayout({ product }: ProductProps) {
   return (
     <S.ProductContainer>
-      <S.ImageContainer></S.ImageContainer>
+      <S.ImageContainer>
+        <Image src={product.imageUrl} width={520} height={480} alt="" />
+      </S.ImageContainer>
       <S.IProductDetails>
-        <h1>Camiseta X</h1>
-        <span>R$ 79,90</span>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-          natus illum quisquam magni doloremque vel quasi. Debitis doloremque,
-          quam ex soluta, aliquid itaque aliquam, quia velit consequatur
-          provident ullam ad?
-        </p>
+        <h1>{product.name}</h1>
+        <span>{product.price}</span>
+        <p>{product.description}</p>
         <button>Comprar agora</button>
       </S.IProductDetails>
     </S.ProductContainer>
