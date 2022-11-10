@@ -1,3 +1,5 @@
+import ProductLayout from 'layouts/ProductLayout'
+
 export default function Product() {
-  return <h1>Product</h1>
+  return <ProductLayout />
 }
