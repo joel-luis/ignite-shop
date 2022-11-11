@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Head from 'next/head'
 import axios from 'axios'
 import Image from 'next/image'
 import { ProductProps } from 'pages/product/[id]'
@@ -24,18 +25,27 @@ export default function ProductLayout({ product }: ProductProps) {
   }
 
   return (
-    <S.ProductContainer>
-      <S.ImageContainer>
-        <Image src={product.imageUrl} width={520} height={480} alt="" />
-      </S.ImageContainer>
-      <S.IProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
-        <p>{product.description}</p>
-        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
-          Comprar agora
-        </button>
-      </S.IProductDetails>
-    </S.ProductContainer>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
+
+      <S.ProductContainer>
+        <S.ImageContainer>
+          <Image src={product.imageUrl} width={520} height={480} alt="" />
+        </S.ImageContainer>
+        <S.IProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
+          <p>{product.description}</p>
+          <button
+            disabled={isCreatingCheckoutSession}
+            onClick={handleBuyProduct}
+          >
+            Comprar agora
+          </button>
+        </S.IProductDetails>
+      </S.ProductContainer>
+    </>
   )
 }
